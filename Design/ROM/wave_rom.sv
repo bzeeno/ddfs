@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 module wave_rom
 #(parameter DATA_WIDTH = 16, 
-            ADDR_WIDTH = 8
+            ADDR_WIDTH = 10
 )
 (
     input  logic clk,
@@ -14,15 +14,14 @@ module wave_rom
     logic [DATA_WIDTH-1:0] data_reg;
 
     initial
-    begin
-        $readmemh("sin_table.txt", rom);`
-    end
-    
+        $readmemh("sine_rom.mem", rom);
+
     always_ff @(posedge clk)
     begin
         data_reg <= rom[addr];
     end
 
     assign data_o = data_reg;
+    
 
 endmodule
