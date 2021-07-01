@@ -6,6 +6,8 @@ Table of Contents
 
 * [Directory Structure](#directory-structure)
 * [DDFS FIR System](#ddfs-fir-system)
+  * [DDFS Module](#ddfs-module)
+  * [FIR Module](#fir-module)
       
 # Directory Structure
 <pre>
@@ -51,7 +53,8 @@ Table of Contents
 - The DDFS module converts phases to amplitudes using a look-up table (LUT). The LUT for a sine wave is created in the main.cpp file.
   - The phase in this case is referring to the phases of the wave. The phase register holds the current phase and it is determined by continuously adding the frequency control word (which is the sum of the carrier frequency control word and the offset frequency control word). 
   - The 10 MSBs of the modulated phase are used as the address bits. (10 bits are used since this is the address width)
-- The DDFS module is capable of modulating the carrier wave. It does so through the following equation: <math> A(t) * sin(2π(f<sub>c</sub> + f<sub>off</sub>) + pha<sub>off</sub>) </math>
+- The DDFS module is capable of modulating the carrier wave. It does so through the following equation: 
+  - <math> A(t) * sin(2π(f<sub>c</sub> + f<sub>off</sub>) + pha<sub>off</sub>) </math>
   - Where, A(t) is the envelope, f<sub>c</sub> is the carrier frequency, f<sub>off</sub> is the offset frequency, and pha<sub>off</sub> is the offset phase.
 
 ![](Diagrams/ddfs.jpg)
@@ -65,5 +68,13 @@ Table of Contents
 - The filter samples at a rate of 10MHz
 - The filter has a total of 15 taps
 - Coefficients were obtained through an online FIR filter design tool (http://t-filter.engineerjs.com/)
-- The first design is shown in figure
+- The first design is shown in the following figure:
 
+![](Diagrams/fir_filter.jpg)
+
+- This design is straightforward, but since the design is sequential in nature, timing issues may arise at faster sampling rates.
+- The design that is used in this project is shown in the following figure:
+
+![](Diagrams/fir_filter_new.jpg)
+
+- Instead of doing the summation at the end with all of the multiplied values, intermediate summations are carried out, making the design more parallel and thus making it less susceptible to timing errors
