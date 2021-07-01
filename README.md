@@ -54,7 +54,7 @@ Table of Contents
 - The DDFS module is capable of modulating the carrier wave. It does so through the following equation: <math> A(t) * sin(2π(f<sub>c</sub> + f<sub>off</sub>) + pha<sub>off</sub>) </math>
   - Where, A(t) is the envelope, f<sub>c</sub> is the carrier frequency, f<sub>off</sub> is the offset frequency, and pha<sub>off</sub> is the offset phase.
 
-![](Diagrams/ddfs.png)
+![](Diagrams/ddfs.jpg)
  
 ## FIR Module
 - Inputs:
