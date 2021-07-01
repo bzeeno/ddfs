@@ -48,4 +48,15 @@ Table of Contents
   - The 10 MSBs of the modulated phase are used as the address bits. (10 bits are used since this is the address width)
 - The DDFS module is capable of modulating the carrier wave. It does so through the following equation: <math> A(t) * sin(2π(f<sub>c</sub> + f<sub>off</sub>) + pha<sub>off</sub>) </math>
   - Where, A(t) is the envelope, f<sub>c</sub> is the carrier frequency, f<sub>off</sub> is the offset frequency, and pha<sub>off</sub> is the offset phase.
+ 
 ## FIR Module
+- Inputs:
+  - 16-bit PCM value from DDFS module
+- Outputs:
+  - 32-bit filtered waveform
+- The FIR low-pass filter has a passband from 0 - 1MHz and a stopband from 2MHz - 5MHz. 
+- The filter samples at a rate of 10MHz
+- The filter has a total of 15 taps
+- Coefficients were obtained through an online FIR filter design tool (http://t-filter.engineerjs.com/)
+- The first design is shown in figure
+
